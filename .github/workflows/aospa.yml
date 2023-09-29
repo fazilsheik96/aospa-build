@@ -1,0 +1,21 @@
+name: AOSPA
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: AOSPA Official
+    runs-on: ubuntu-latest
+    
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.JENKINS_PRIVATE_KEY }}
+        HOST: ${{ secrets.HOST }}
+
+    - name: Building AOSPA
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        command_timeout: 400m
+        script: ${{ secrets.AOSPA }}

@@ -1,19 +1,23 @@
-name: Evolution X
-on: 
- workflow_dispatch
- 
-jobs:
+name: AOSPA
+on:
+  workflow_dispatch:
 
+jobs:
+  
   build:
-    name: Evolution X Official
-    runs-on: ubuntu-latest
+    name: AOSPA Official
+    runs-on: ubuntu-latest    
+    env:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      HOST: ${{ secrets.HOST }}
     steps:
-    - name: Evolution X building
+    - name: Checkout code
+      uses: actions/checkout@v2    
+    - name: Building AOSPA
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
+        host: ${{ env.HOST }}
         port: ${{ secrets.PORT }}
-        command_timeout: 400m
-        script: ${{ secrets.EVOLUTION }}
+        private_key: ${{ env.SSH_PRIVATE_KEY }}
+        script: ${{ secrets.AOSPA }}

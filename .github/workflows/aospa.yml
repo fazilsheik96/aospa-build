@@ -7,7 +7,7 @@ jobs:
     name: AOSPA Official
     runs-on: ubuntu-latest
     
-    env:
+env:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       HOST: ${{ secrets.HOST }}
 
